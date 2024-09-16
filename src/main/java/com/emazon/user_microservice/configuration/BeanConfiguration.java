@@ -5,6 +5,7 @@ import com.emazon.user_microservice.adapters.driven.jpa.adapter.UserJpaAdapter;
 import com.emazon.user_microservice.adapters.driven.jpa.mapper.UserEntityMapper;
 import com.emazon.user_microservice.adapters.driven.jpa.persistence.RoleRepository;
 import com.emazon.user_microservice.adapters.driven.jpa.persistence.UserRepository;
+import com.emazon.user_microservice.adapters.driving.rest.service.impl.RoleServiceImpl;
 import com.emazon.user_microservice.domain.api.UserServicePort;
 import com.emazon.user_microservice.domain.api.usecase.UserUseCase;
 import com.emazon.user_microservice.domain.exceptions.UserWithEmailNotFoundException;
@@ -25,6 +26,7 @@ public class BeanConfiguration {
     private final UserRepository userRepository;
     private final UserEntityMapper userEntityMapper;
     private final RoleRepository roleRepository;
+    private final RoleServiceImpl roleServiceImpl;
 
     @Bean
     UserPersistencePort userPersistencePort() {
@@ -33,7 +35,7 @@ public class BeanConfiguration {
 
     @Bean
     UserServicePort userServicePort() {
-        return new UserUseCase(userPersistencePort());
+        return new UserUseCase(userPersistencePort(),roleServiceImpl);
     }
 
     // Service

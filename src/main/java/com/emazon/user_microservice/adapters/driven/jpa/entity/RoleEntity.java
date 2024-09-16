@@ -21,6 +21,7 @@ public class RoleEntity implements Serializable {
     @Column(name = "role_id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role_name", unique = true, nullable = false)
     private RoleName roleName;
 }
